@@ -1,17 +1,70 @@
+// Import required React libraries
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import faker from 'faker';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+/**
+ * Prop Libraries
+ */
+import CommentDetailProp from './CommentDetailProp';
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+/**
+ * Title Heading
+ */
+const titleSection = 'Comments';
+
+/**
+ * Styling Variables
+ */
+const mainDivStyle = { marginTop: '20px', padding: '20px' };
+
+const divStyle = {
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'space-around',
+};
+
+// const commentStyle = {
+//   padding: '15px',
+//   margin: '20px',
+//   border: '1px solid black',
+//   borderRadius: '10px',
+//   width: '22%',
+//   height: '15%',
+// };
+
+var options = {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+};
+
+const Comment = () => {
+  return (
+    <div className="comment">
+      <CommentDetailProp
+        author={faker.name.firstName}
+        theDate={faker.date.past().toLocaleDateString('en-US', options)}
+        text={faker.lorem.words(3)}
+        myImg={faker.image.avatar()}
+      />
+    </div>
+  );
+};
+
+// Create the required component
+const App = () => {
+  return (
+    <div className="ui container comments" style={{ marginTop: '5%' }}>
+      <h2 class="ui dividing header">{titleSection}</h2>
+      <div style={{ fontSize: '1.67rem', margin: '5%' }}>
+        <Comment />
+        <Comment />
+        <Comment />
+      </div>
+    </div>
+  );
+};
+
+// Render the required content on the screen
+ReactDOM.render(<App />, document.getElementById('root'));
